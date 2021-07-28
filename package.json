@@ -1,0 +1,22 @@
+{
+  "name": "@auth0/tmp-sdk-release-poc",
+  "version": "1.0.0",
+  "description": "Temp SDK release project",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbalmaceda/tmp-sdk-release-poc.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbalmaceda/tmp-sdk-release-poc/issues"
+  },
+  "homepage": "https://github.com/lbalmaceda/tmp-sdk-release-poc#readme",
+  "devDependencies": {
+    "mocha": "^9.0.3"
+  }
+}
