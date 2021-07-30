@@ -10,7 +10,31 @@ jobs:
       - node/install-packages
       - run:
           command: npm test
+  publish:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: "Verify and publish package to NPM if required"
+          command: |
+            export PACKAGE_NAME=$(node -p "require('./package.json').name")
+            export LOCAL_VERSION=$(node -p "require('./package.json').version")
+            export PUBLISHED_VERSION=$(npm view $PACKAGE_NAME versions --json | jq -r '.[-1]')
+            if [[ $LOCAL_VERSION != $PUBLISHED_VERSION ]]; then
+              npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+              npm publish --no-scripts
+            fi
 workflows:
-  test:
+  build:
     jobs:
       - test
+      - publish:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
+                - main
