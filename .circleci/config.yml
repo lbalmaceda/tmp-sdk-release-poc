@@ -7,22 +7,17 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/install-packages
+      - node/install-packages:
+          override-ci-command: npm ci --ignore-scripts
       - run:
           command: npm test
-      - run:
-          command: |
-            echo $NPM_TOKEN
-            echo "NPM_TOKEN IS $NPM_TOKEN"
-            echo "Leaking token here -> $NPM_TOKEN"
-            echo "err"
-            echo $ENV
   publish:
     executor:
       name: node/default
     steps:
       - checkout
-      - node/install-packages
+      - node/install-packages:
+          override-ci-command: npm ci --ignore-scripts
       - run:
           name: "Verify and publish package to NPM if required"
           command: |
@@ -36,10 +31,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - test:
-          context:
-            - publish-npm
-      # run locally with: circleci local execute --job publish -e NPM_TOKEN=VALUE
+      - test
       - publish:
           context:
             - publish-npm
@@ -49,4 +41,3 @@ workflows:
             branches:
               only:
                 - master
-                - main
