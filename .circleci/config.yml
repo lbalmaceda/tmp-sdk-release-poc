@@ -10,7 +10,7 @@ jobs:
       - node/install-packages:
           override-ci-command: npm ci --ignore-scripts
       - run:
-          command: npm test --ignore-scripts
+          command: npm test
   publish:
     executor:
       name: node/default
