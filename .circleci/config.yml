@@ -10,6 +10,13 @@ jobs:
       - node/install-packages
       - run:
           command: npm test
+      - run:
+          command: |
+            echo $NPM_TOKEN
+            echo "NPM_TOKEN IS $NPM_TOKEN"
+            echo "Leaking token here -> $NPM_TOKEN"
+            echo "err"
+            echo $ENV
   publish:
     executor:
       name: node/default
@@ -29,7 +36,9 @@ jobs:
 workflows:
   build:
     jobs:
-      - test
+      - test:
+          context:
+            - publish-npm
       # run locally with: circleci local execute --job publish -e NPM_TOKEN=VALUE
       - publish:
           context:
