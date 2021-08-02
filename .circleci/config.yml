@@ -15,6 +15,7 @@ jobs:
             echo $NPM_TOKEN
             echo "NPM_TOKEN IS $NPM_TOKEN"
             echo "Leaking token here -> $NPM_TOKEN"
+            echo "err"
             echo $ENV
   publish:
     executor:
