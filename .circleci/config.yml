@@ -1,42 +1,15 @@
 version: '2.1'
 orbs:
-  node: circleci/node@4.5.1
-jobs:
-  test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          override-ci-command: npm ci --ignore-scripts
-      - run:
-          command: npm test
-  publish:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          override-ci-command: npm ci --ignore-scripts
-      - run:
-          name: "Verify and publish package to NPM if required"
-          command: |
-            export PACKAGE_NAME=$(node -p "require('./package.json').name")
-            export LOCAL_VERSION=$(node -p "require('./package.json').version")
-            export PUBLISHED_VERSION=$(npm view $PACKAGE_NAME versions --json | jq -r '.[-1]')
-            if [[ $LOCAL_VERSION != $PUBLISHED_VERSION ]]; then
-              npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-              npm publish --no-scripts
-            fi
+  node-publisher: lbalmaceda/node-publisher@dev:9b37b36
 workflows:
   build:
     jobs:
-      - test
-      - publish:
+      - node-publisher/test
+      - node-publisher/publish:
           context:
             - publish-npm
           requires:
-            - test
+            - node-publisher/test
           filters:
             branches:
               only:
