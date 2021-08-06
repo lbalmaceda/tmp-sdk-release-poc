@@ -1,6 +1,6 @@
 {
   "name": "@luchonpm/tmp-sdk-release-poc",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Temp SDK release project",
   "main": "index.js",
   "scripts": {
