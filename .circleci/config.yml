@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  node-publisher: lbalmaceda/node-publisher@dev:9b37b36
+  node-publisher: lbalmaceda/node-publisher@dev:d1b8cd7
 workflows:
   build:
     jobs:
