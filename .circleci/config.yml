@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  ship: lbalmaceda/node-publisher@dev:e838acf
+  ship: lbalmaceda/node-publisher@dev:4ac4806
 jobs:
   test:
     executor: ship/node
@@ -13,10 +13,11 @@ workflows:
     jobs:
       - test
       - ship/node-publish:
-          context:
-            - publish-npm
           requires:
             - test
+          context:
+            - publish-npm
+            - publish-gh
           filters:
             branches:
               only:
