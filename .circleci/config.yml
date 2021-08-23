@@ -1,15 +1,22 @@
 version: '2.1'
 orbs:
-  node-publisher: lbalmaceda/node-publisher@dev:d1b8cd7
+  ship: lbalmaceda/node-publisher@dev:e838acf
+jobs:
+  test:
+    executor: ship/node
+    steps:
+      - checkout
+      - ship/node-install-packages
+      - run: npm test
 workflows:
   build:
     jobs:
-      - node-publisher/test
-      - node-publisher/publish:
+      - test
+      - ship/node-publish:
           context:
             - publish-npm
           requires:
-            - node-publisher/test
+            - test
           filters:
             branches:
               only:
