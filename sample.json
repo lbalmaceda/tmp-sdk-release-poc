@@ -1,0 +1,17 @@
+[
+  {
+    "baseRefName": "master",
+    "body": "Here we are making a release",
+    "title": "Release v1.2.3"
+  },
+  {
+    "baseRefName": "master",
+    "body": "",
+    "title": "Patch release, expected Orb to publish"
+  },
+  {
+    "baseRefName": "master",
+    "body": "No new version should be triggered. But test should run and pass.",
+    "title": "Simplify configuration file using custom orb"
+  }
+]
