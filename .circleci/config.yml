@@ -1,26 +1,23 @@
 version: '2.1'
 orbs:
-  node-publisher: lbalmaceda/node-publisher@dev:d1b8cd7
-  gh: circleci/github-cli@1.0.3
+  ship: lbalmaceda/node-publisher@dev:1eaf527
 jobs:
   gh-release:
-    executor: node-publisher/default
+    executor: ship/node
     steps:
       - checkout
-      - gh/setup:
-          token: GH_TOKEN
-      - run: gh release create "0.1.2"
+      - ship/github-release
 workflows:
   build:
     jobs:
       - gh-release
-      - node-publisher/test
-      - node-publisher/publish:
-          context:
-            - publish-npm
-          requires:
-            - node-publisher/test
-          filters:
-            branches:
-              only:
-                - master
+      # - ship/test
+      # - ship/publish:
+      #     context:
+      #       - publish-npm
+      #     requires:
+      #       - node-publisher/test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
