@@ -18,3 +18,7 @@ workflows:
           context:
             - publish-npm
             - publish-gh
+          filters:
+            branches:
+              only:
+                - master
