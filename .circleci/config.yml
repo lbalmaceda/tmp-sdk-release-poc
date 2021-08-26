@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  ship: lbalmaceda/node-publisher@dev:49dd070
+  ship: lbalmaceda/node-publisher@dev:05c72c5
 jobs:
   test:
     executor: ship/node
@@ -18,7 +18,3 @@ workflows:
           context:
             - publish-npm
             - publish-gh
-          filters:
-            branches:
-              only:
-                - master
