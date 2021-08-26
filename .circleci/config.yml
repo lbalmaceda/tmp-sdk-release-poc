@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  ship: lbalmaceda/node-publisher@dev:49dd070
+  ship: lbalmaceda/node-publisher@dev:c01d38d
 jobs:
   test:
     executor: ship/node
