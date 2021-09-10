@@ -1,6 +1,6 @@
 version: '2.1'
 orbs:
-  ship: lbalmaceda/node-publisher@dev:e838acf
+  ship: auth0/ship@dev:ad85da2
 jobs:
   test:
     executor: ship/node
@@ -13,11 +13,9 @@ workflows:
     jobs:
       - test
       - ship/node-publish:
+          publish-command: echo "hi" && echo "bye"
           context:
             - publish-npm
+            - publish-gh
           requires:
             - test
-          filters:
-            branches:
-              only:
-                - master
