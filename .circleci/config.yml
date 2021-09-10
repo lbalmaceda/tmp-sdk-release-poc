@@ -13,7 +13,7 @@ workflows:
     jobs:
       - test
       - ship/node-publish:
-          publish-command: echo "hi" && echo "bye"
+          publish-command: npm publish --dry-run
           context:
             - publish-npm
             - publish-gh
